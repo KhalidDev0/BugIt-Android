@@ -1,17 +1,17 @@
 package app.bugit.bugitandroid
 
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import app.bugit.bugitandroid.ui.theme.BugItAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
+import dev.olshevski.navigation.reimagined.NavBackHandler
+import dev.olshevski.navigation.reimagined.NavHost
+import dev.olshevski.navigation.reimagined.rememberNavController
+import kotlinx.parcelize.Parcelize
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -19,27 +19,28 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BugItAndroidTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
-                }
+                RootNavGraph()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun RootNavGraph(){
+    val navController = rememberNavController<RootDestination>(startDestination = RootDestination.BugList)
+    NavBackHandler(controller = navController)
+
+    NavHost(navController) {destination ->
+        when(destination){
+            is RootDestination.BugList -> Box(){}
+            is RootDestination.AddingBug -> Box(){}
+        }
+    }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BugItAndroidTheme {
-        Greeting("Android")
-    }
+sealed class RootDestination : Parcelable {
+    @Parcelize
+    object BugList : RootDestination()
+    @Parcelize
+    object AddingBug : RootDestination()
 }
