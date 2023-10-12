@@ -1,6 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -65,5 +69,16 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
+    // BugIt Network Layer
     implementation 'com.github.KhalidDev0:BugIt-Network-Layer:0.02'
+
+    // Dagger - Hilt with navigation compose
+    implementation "com.google.dagger:hilt-android:2.47"
+    kapt "com.google.dagger:hilt-android-compiler:2.47"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+
+    // Reimagined navigation
+    implementation 'dev.olshevski.navigation:reimagined:1.4.0'
+    implementation 'dev.olshevski.navigation:reimagined-material3:1.4.0'
+    implementation 'dev.olshevski.navigation:reimagined-hilt:1.4.0'
 }
