@@ -79,6 +79,7 @@ class AddingBugViewModel @Inject constructor(
                     is Resource.Success -> {
                         onEvent(AddingBugEvent.DismissAllDialog)
                         value = value.copy(showSuccessDialog = true, dialogText = resource.data.message)
+                        clearFields()
                     }
                     is Resource.Error -> {
                         onEvent(AddingBugEvent.DismissAllDialog)
@@ -87,5 +88,13 @@ class AddingBugViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    private fun clearFields() {
+        privateState.value = privateState.value.copy(
+            selectedImageUri = null,
+            title = "",
+            description = ""
+        )
     }
 }

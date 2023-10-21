@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -76,16 +78,20 @@ fun AddingBugScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp, vertical = 10.dp)
     ) {
         Text(text = "BugIt", color = Color.Black, fontSize = 20.sp)
 
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .height(400.dp)
-            .border(2.dp, Color.Black)
-            .clickable { singlePhotoPickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) })
+        Box(contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(400.dp)
+                .border(2.dp, Color.Black)
+                .clickable { singlePhotoPickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) })
         {
+            Text(text = "Click Here To Select an Image", color = Color.Black, fontSize = 18.sp)
+
             AsyncImage(
                 model = state.selectedImageUri,
                 contentDescription = "",
