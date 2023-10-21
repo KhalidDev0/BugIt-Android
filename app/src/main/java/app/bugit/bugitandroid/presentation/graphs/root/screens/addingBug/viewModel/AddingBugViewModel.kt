@@ -36,8 +36,8 @@ class AddingBugViewModel @Inject constructor(
     }
 
     private fun submit(){
-        if (privateState.value.title.isNullOrEmpty()
-            || privateState.value.description.isNullOrEmpty()
+        if (privateState.value.title.isEmpty()
+            || privateState.value.description.isEmpty()
             || privateState.value.selectedImageUri == null
         ){
             privateState.value = privateState.value.copy(showErrorDialog = true, dialogText = "Please fill all required fields")
