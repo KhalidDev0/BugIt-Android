@@ -70,12 +70,15 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
     // BugIt Network Layer
-    implementation 'com.github.KhalidDev0:BugIt-Network-Layer:0.02'
+    implementation 'com.github.KhalidDev0:BugIt-Network-Layer:v2.0.0'
 
     // Dagger - Hilt with navigation compose
     implementation "com.google.dagger:hilt-android:2.47"
     kapt "com.google.dagger:hilt-android-compiler:2.47"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
+
+    //Coil
+    implementation 'io.coil-kt:coil-compose:2.4.0'
 
     // Reimagined navigation
     implementation 'dev.olshevski.navigation:reimagined:1.4.0'
